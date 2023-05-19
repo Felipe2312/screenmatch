@@ -1,3 +1,5 @@
+package br.com.alura.screenmatch.principal;
+
 import br.com.alura.screenmatch.calculos.CalculadoraDeTempo;
 import br.com.alura.screenmatch.calculos.FiltroRecomendacao;
 import br.com.alura.screenmatch.modelo.Episodio;
@@ -8,6 +10,8 @@ import java.util.ArrayList;
 
 public class Principal {
     public static void main(String[] args) {
+        //FILME
+        System.out.println("Filme:");
         Filme meuFilme = new Filme("O poderoso chefão", 1970);
         meuFilme.setDuracaoEmMinutos(180);
 
@@ -17,38 +21,28 @@ public class Principal {
         meuFilme.avalia(5);
         meuFilme.avalia(10);
 
-        System.out.println(meuFilme.getTotalDeAvaliacoes());
-        System.out.println(meuFilme.pegaMedia());
+        System.out.println("Total de avaliações: " + meuFilme.getTotalDeAvaliacoes());
+        System.out.println("Média das avaliações: " + meuFilme.pegaMedia());
+        FiltroRecomendacao filtro = new FiltroRecomendacao();
+        filtro.filtra(meuFilme);
 
+        //SÉRIE
+        System.out.println("\n\nSérie:");
         Serie lost = new Serie("Lost", 2000);
         lost.setTemporadas(7);
         lost.setEpisodiosPorTemporada(10);
         lost.setMinutosPorEpisodio(50);
         lost.exibeFichaTecnica();
         System.out.println("Duração para maratonar lost: " + lost.getDuracaoEmMinutos() + " Minutos");
+        Episodio episodio = new Episodio("lost", 1);
+        episodio.setTotalVisuzacoes(300);
+        System.out.println("Visualizações EP1: " + episodio.getTotalVisuzacoes());
 
+        //calculadora de tempo:
         CalculadoraDeTempo calculadora = new CalculadoraDeTempo();
         calculadora.inclui(meuFilme);
         calculadora.inclui(lost);
-        System.out.println(calculadora.getTempoTotal());
-
-        FiltroRecomendacao filtro = new FiltroRecomendacao();
-        filtro.filtra(meuFilme);
-
-        Episodio episodio = new Episodio("lost", 1);
-        episodio.setTotalVisuzacoes(300);
-
-        Filme filmeDoPaulo = new Filme("Dogviller", 2003);
-        filmeDoPaulo.setDuracaoEmMinutos(200);
-        filmeDoPaulo.avalia(10);
-
-        ArrayList<Filme> listaDeFilme = new ArrayList<>();
-        listaDeFilme.add(filmeDoPaulo);
-        listaDeFilme.add(meuFilme);
-        System.out.println("Tamanho da lista: " + listaDeFilme.size());
-        System.out.println("Primeiro filme: " + listaDeFilme.get(0).getNome());
-        System.out.println(listaDeFilme);
-
+        System.out.println("\n\nMaratonando:\nTempo para maratonar tudo: " + calculadora.getTempoTotal());
 
     }
 }
